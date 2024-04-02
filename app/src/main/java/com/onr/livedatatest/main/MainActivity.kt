@@ -10,6 +10,9 @@ import com.onr.livedatatest.livedatatest.MyViewModel
 /**
  * Created by Salih AKAR 10:46 22.03.2024
  */
+
+//todo-> roadmap
+//https://coderspace.io/roadmap/android-developer-yol-haritasi/
 class MainActivity() : AppCompatActivity() {
 
     private lateinit var binder: MainLayoutBinding
