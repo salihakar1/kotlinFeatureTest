@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.onr.livedatatest.databinding.MainLayoutBinding
 import com.onr.livedatatest.livedatatest.MyTestDataServer
 import com.onr.livedatatest.livedatatest.MyViewModel
+import com.onr.livedatatest.roomtest.MyRoom
 
 /**
  * Created by Salih AKAR 10:46 22.03.2024
@@ -22,7 +23,11 @@ class MainActivity() : AppCompatActivity() {
         binder = MainLayoutBinding.inflate(layoutInflater)
         setContentView(binder.root)
 
-        testLiveData()
+//        TODO ->                         Caused by: java.lang.RuntimeException: Cannot find implementation for com.onr.livedatatest.roomtest.MyDatabase. MyDatabase_Impl does not exist
+//          problem needs to check
+        val myRoom = MyRoom(this)
+
+//        testLiveData()
     }
 
     //    live data Test
