@@ -3,10 +3,11 @@ package com.onr.livedatatest.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.room.Room
 import com.onr.livedatatest.databinding.MainLayoutBinding
 import com.onr.livedatatest.livedatatest.MyTestDataServer
 import com.onr.livedatatest.livedatatest.MyViewModel
-import com.onr.livedatatest.roomtest.MyRoom
+import com.onr.livedatatest.roomtest.MyAbsUserDatabase
 
 /**
  * Created by Salih AKAR 10:46 22.03.2024
@@ -15,6 +16,7 @@ import com.onr.livedatatest.roomtest.MyRoom
 //todo-> roadmap
 //https://coderspace.io/roadmap/android-developer-yol-haritasi/
 class MainActivity() : AppCompatActivity() {
+    private val tag = "MainActivity"
 
     private lateinit var binder: MainLayoutBinding
 
@@ -23,11 +25,13 @@ class MainActivity() : AppCompatActivity() {
         binder = MainLayoutBinding.inflate(layoutInflater)
         setContentView(binder.root)
 
-//        TODO ->                         Caused by: java.lang.RuntimeException: Cannot find implementation for com.onr.livedatatest.roomtest.MyDatabase. MyDatabase_Impl does not exist
-//          problem needs to check
-        val myRoom = MyRoom(this)
-
+//        testRoomDatabase()
 //        testLiveData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        testRoomDatabase()
     }
 
     //    live data Test
@@ -47,6 +51,25 @@ class MainActivity() : AppCompatActivity() {
         }
     }
 
+
+    private val databaseName: String = "MYUser_DATABASE"
+    private fun testRoomDatabase() {
+
+        try {
+            val db = Room.databaseBuilder(
+                applicationContext, MyAbsUserDatabase::class.java, databaseName
+            )
+                .allowMainThreadQueries()
+                .build()
+
+            db.userDao()
+        } catch (e: Exception) {
+            "database failed-> ${e.message}".debug(tag)
+            e.printStackTrace()
+        }
+
+
+    }
 
 //  /
 }
